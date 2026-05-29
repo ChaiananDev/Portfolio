@@ -1,0 +1,78 @@
+/* Reset CSS */
+:root {
+  --primary-color: #0077ff;
+  --secondary-color: #f2f2f2;
+  --text-color: #333;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Smooth Scroll */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Body */
+body {
+  font-family: Arial, sans-serif;
+}
+
+/* Section */
+section {
+  width: 100%;
+  min-height: 100vh;
+  background-color: #f2f2f2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 100px 50px;
+}
+
+/* Navbar */
+.navbar {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 30px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 20px 50px;
+  background-color: white;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+}
+
+/* Navbar Links */
+.navbar a {
+  text-decoration: none;
+  text-transform: uppercase;
+  color: black;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+/* Hover Effect */
+.navbar a:hover {
+  color: #0077ff;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .navbar {
+    justify-content: center;
+    padding: 20px;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+
+  section {
+    padding: 100px 20px;
+    text-align: center;
+  }
+}
