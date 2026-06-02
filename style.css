@@ -197,7 +197,7 @@ section {
     text-align: center;
   }
 
-  .row {
+  .row-hero {
     flex-direction: column;
   }
 }
