@@ -1,23 +1,57 @@
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>My Portfolio</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-        <header class="header">
-            <nav class="navbar">
-                <a href="#home">Home</a>
-                <a href="#about">About</a>
-                <a href="#projects">Projects</a>
-                <a href="#contact">Contact</a>
-            </nav>
-        </header>
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <link rel="stylesheet" href="style.css" />
+    <script src="script.js" defer></script>
+  </head>
 
-        <section id="home">Home</section>
-        <section id="about">About</section>
-        <section id="projects">Projects</section>
-        <section id="contact">Contact</section>
-</body>
+  <body>
+    <header class="navbar">
+      <div class="nav-container">
+        <a href="index.html" class="logo">
+          <span>Chaianan</span>
+        </a>
+        <nav class="nav-links">
+          <a href="#home">Home</a>
+          <a href="#about">About</a>
+          <a href="#projects">Projects</a>
+          <a href="#contact">Contact</a>
+        </nav>
+        <button class="mobile-menu-btn" aria-label="Toggle menu">
+          <i class="ph ph-list"></i>
+        </button>
+        <div class="languageSwitch">
+          <div class="row-btn-language">
+            🌐
+            <button id="btn-th">TH</button>/
+            <button id="btn-en">EN</button>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <section id="home">
+      <div class="container">
+        <div class="row-hero">
+          <div class="col">
+            <h1 id="welcome"></h1>
+            <div class="row-hero">
+              <h2 id="firstname"></h2>
+              <h2 id="lastname""></h2>
+            </div>
+          </div>
+          <div class="col">
+            <img src="/asset/DSC07951.jpg" alt="Profile Picture" class="profile-pic"/>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="about">About</section>
+    <section id="projects">Projects</section>
+    <section id="contact">Contact</section>
+  </body>
 </html>
