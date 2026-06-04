@@ -47,24 +47,25 @@ document.addEventListener("DOMContentLoaded", () => {
   
   const translations = {
     en: {
-      welcome: "Hi, I'm",
+      welcome: "Hi,I'm",
       firstname: "Chaianan",
       lastname: "Simachai",
+      role: "Web Developer/Backend Developer",
     },
 
     th: {
-      welcome: "ยินดีต้อนรับเข้าสู่เว็บไซต์ของชัยอนันต์",
+      welcome: "สวัสดีครับ ผมคือ",
       firstname: "ชัยอนันต์",
       lastname: "สิมาชัย",
+      role: "นักพัฒนาเว็บ/นักพัฒนาแบ็กเอนด์",
     },
   };
 
   function setLanguage(lang) {
     document.getElementById("welcome").textContent = translations[lang].welcome;
-    document.getElementById("firstname").textContent =
-      translations[lang].firstname;
-    document.getElementById("lastname").textContent =
-      translations[lang].lastname;
+    document.getElementById("firstname").textContent = translations[lang].firstname;
+    document.getElementById("lastname").textContent = translations[lang].lastname;
+    document.getElementById("role").textContent = translations[lang].role;
   }
   setLanguage("en");
 });

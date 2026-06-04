@@ -80,7 +80,6 @@ body {
   display: flex;
   align-items: center;
   gap: 10px;
-
   text-decoration: none;
   color: var(--text-color);
 }
@@ -138,23 +137,43 @@ section {
 
 .row-hero {
   display: flex;
-  gap: 1rem;
+  gap: 5px;
   align-items: center;
   justify-content: center;
 }
 
-.col {
+.col-hero {
   flex: 1;
   text-align: center;
 }
 
-.col img {
+.col-hero img {
   width: 55%;
   height: auto;
   border-radius: 10px;
 }
 
+.col-hero h1 {
+  font-size: 4.6rem;
+  margin-bottom: 1rem;
+}
 
+.social-links {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  margin-top: 20px;
+}
+.social-links a {
+  color: var(--text-color);
+  font-size: 1.5rem;
+  transition: var(--transition-fast);
+  scale: 1;
+}
+.social-links a:hover {
+  color: #0077ff;
+  scale: 1.5;
+}
 
 
 /* Responsive */
@@ -200,4 +219,5 @@ section {
   .row-hero {
     flex-direction: column;
   }
+  
 }
