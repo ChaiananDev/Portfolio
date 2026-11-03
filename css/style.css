@@ -1,0 +1,65 @@
+/* Reset CSS */
+:root {
+    /* Colors */
+    --primary-color: #4873a2;
+    --secondary-color: #658cb8;
+
+    --bg-color: #c4d6ee;
+    --surface-color: #1e293b;
+    --text-color: #f8fafc;
+    --text-muted: #94a3b8;
+
+    /* Typography */
+    --font-family: 'Inter', sans-serif;
+
+    /* Spacing */
+    --spacing-xs: 4px;
+    --spacing-sm: 8px;
+    --spacing-md: 16px;
+    --spacing-lg: 24px;
+    --spacing-xl: 32px;
+    --spacing-2xl: 48px;
+
+    /* Layout */
+    --container-width: 100%;
+    --container-max-width: 1200px;
+
+    /* Border */
+    --border-radius: 12px;
+
+    /* Transition */
+    --transition: 0.3s ease;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Smooth Scroll */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Body */
+body {
+  min-height: 100vh;
+  line-height: 1.5;
+}
+
+img {
+    display: block;
+    max-width: 100%;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+button,
+input,
+textarea {
+    font: inherit;
+}
