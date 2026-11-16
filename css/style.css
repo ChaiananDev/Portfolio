@@ -1,65 +1,413 @@
-/* Reset CSS */
 :root {
-    /* Colors */
-    --primary-color: #4873a2;
-    --secondary-color: #658cb8;
+  /* Colors */
+  --color-primary: #095146;
+  --color-bg: #e9ffff;
+  --color-surface: #ffffff;
+  --color-text: #000000;
 
-    --bg-color: #c4d6ee;
-    --surface-color: #1e293b;
-    --text-color: #f8fafc;
-    --text-muted: #94a3b8;
+  /* Layout */
+  --max-width: 1200px;
+  --container-pad: 2rem;
 
-    /* Typography */
-    --font-family: 'Inter', sans-serif;
+  /* Spacing */
+  --space-xs: 0.25rem; /* 4px */
+  --space-sm: 0.5rem;  /* 8px */
+  --space-md: 1rem;   /* 16px */
+  --space-lg: 2rem;   /* 32px */
+  --space-xl: 4rem;   /* 64px */
+  --space-2xl: 6rem;  /* 96px */
 
-    /* Spacing */
-    --spacing-xs: 4px;
-    --spacing-sm: 8px;
-    --spacing-md: 16px;
-    --spacing-lg: 24px;
-    --spacing-xl: 32px;
-    --spacing-2xl: 48px;
-
-    /* Layout */
-    --container-width: 100%;
-    --container-max-width: 1200px;
-
-    /* Border */
-    --border-radius: 12px;
-
-    /* Transition */
-    --transition: 0.3s ease;
+  --speed-fast: 0.2s;
+  --speed-base: 0.4s;
+  --speed-slow: 1.2s;
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  
+  --font-main: 'Kanit', 'Noto Sans Thai', sans-serif;
+  --font-display: 'Kanit', sans-serif;
 }
 
-* {
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
 }
-
-/* Smooth Scroll */
-html {
+html{
   scroll-behavior: smooth;
+  scroll-padding-top: 6rem;  
 }
 
-/* Body */
 body {
-  min-height: 100vh;
-  line-height: 1.5;
+  font-family: var(--font-main);
+  background: var(--color-bg);
+  color: var(--color-text);
+  line-height: 1.6;
 }
 
 img {
-    display: block;
-    max-width: 100%;
+  display: block;
+  max-width: 100%;
+  height: auto;
 }
 
 a {
-    text-decoration: none;
-    color: inherit;
+  color: inherit;
 }
 
-button,
-input,
-textarea {
-    font: inherit;
+ul {
+  list-style: none;
+}
+
+/* ============================================================
+   3. LAYOUT  (container, header, footer)
+   ============================================================ */
+.container {
+  width: min(100% - 2 * var(--container-pad), var(--max-width));
+  margin-inline: auto;
+}
+
+.site-header {
+  position: sticky;             /* ติดขอบบนเมื่อเลื่อนถึง */
+  top: 0;                       /* ติดตรงขอบบนของจอ */
+  z-index: 10;                  /* อยู่หน้า section อื่น */
+  padding-block: var(--space-md);
+  background: var(--color-bg);  /* ไม่ให้เนื้อหาโปร่งทะลุตอนเลื่อน */
+  box-shadow: 0 2px 12px rgb(0 0 0 / 0.06);
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-lg);
+}
+
+.nav-links {
+  display: flex;
+  gap: var(--space-lg);
+}
+
+.nav-links a {
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.nav-links a:hover {
+  color: var(--color-primary);
+}
+
+.site-footer {
+  padding-block: var(--space-lg);
+  text-align: center;
+  opacity: 0.7;
+}
+
+
+/* ============================================================
+   4. HERO  (ส่วนบนสุด: ชื่อ + รูป + ข้อมูล)
+   ============================================================ */
+.hero {
+  min-height: 100vh;            /* สูงเท่าจอ รูปจะชิดล่างได้จริง */
+  overflow: hidden;
+}
+
+.hero-inner {
+  position: relative;
+  height: 100vh;                /* ให้ absolute ลูกอ้างอิงความสูงเต็มจอ */
+  display: grid;
+  place-items: center;
+}
+
+/* ชื่อตัวใหญ่ อยู่ด้านบน */
+.hero-title {
+  position: relative;
+  z-index: 1;
+  align-self: start;
+  margin-top: var(--space-lg);
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(3rem, 9vw, 8rem);
+  line-height: 0.9;
+  text-align: center;
+  text-transform: uppercase;
+  animation: fade-up var(--speed-slow) var(--ease) both;
+}
+
+.hero-title .solid {
+  display: block;
+}
+
+/* ตัวอักษรแบบเส้นขอบ (ไม่มีสีข้างใน) */
+.hero-title .outline {
+  display: block;
+  color: transparent;
+  -webkit-text-stroke: 2px var(--color-text);
+}
+
+/* รูปคน วางกลาง-ล่าง ทับตัวอักษร */
+.hero-photo {
+  position: absolute;
+  bottom: 0;                    /* ชิดขอบล่างของ hero */
+  left: 50%;
+  transform: translateX(-50%);
+  height: 85%;                  /* สูงขึ้น ยอดรูปจะขึ้นไปทับตัวหนังสือ */
+  width: auto;
+  z-index: 2;
+  animation: fade-in var(--speed-slow) var(--ease) both;
+}
+
+/* ข้อมูลซ้ายล่าง */
+.hero-info {
+  position: absolute;
+  top: 5%;                       /* เริ่มจากขอบบน */
+  bottom: 0;                    /* ถึงขอบล่าง → สูงเท่า hero */
+  left: 0;
+  max-width: 320px;
+  z-index: 3;
+  display: flex;                /* จัดลูกเป็นคอลัมน์ */
+  flex-direction: column;
+  justify-content: center;      /* จัดกลางแนวตั้ง */
+  animation: fade-up var(--speed-slow) var(--ease) 0.2s both;
+}
+
+.role {
+  font-family: var(--font-display);
+  font-size: 2rem;
+  font-weight: 500;
+  margin-bottom: var(--space-sm);
+}
+
+.intro {
+  margin-bottom: var(--space-md);
+  opacity: 0.8;
+}
+
+/* ปุ่ม social ลอยขวา */
+.social {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  animation: fade-up var(--speed-slow) var(--ease) 0.4s both;
+}
+
+
+/* ============================================================
+   5. COMPONENTS  (ส่วนที่ใช้ซ้ำได้ เช่น ปุ่ม, pill, card)
+   ============================================================ */
+
+/* Status pill มีจุดเขียวนำหน้า */
+.status {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: var(--space-xs) var(--space-md);
+  border-radius: 999px;
+  background: var(--color-surface);
+  box-shadow: 0 2px 8px rgb(0 0 0 / 0.08);
+  font-size: 0.875rem;
+}
+
+.status::before {
+  content: "";
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--color-primary);
+}
+
+/* ปุ่มหลัก */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: 0.75rem 1.5rem;
+  border-radius: 999px;
+  border: 2px solid var(--color-primary);
+  background: var(--color-primary);
+  color: var(--color-surface);
+  font-weight: 500;
+  text-decoration: none;
+  transition: transform var(--speed-fast) var(--ease),
+              box-shadow var(--speed-fast) var(--ease);
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgb(9 81 70 / 0.15);
+}
+
+/* ปุ่มแบบขอบ ไม่มีพื้นทึบ */
+.btn--outline {
+  background: transparent;
+  color: var(--color-text);
+  border-color: var(--color-text);
+}
+
+/* Social link แบบ pill */
+.social a {
+  padding: var(--space-sm) var(--space-md);
+  border: 1px solid rgb(0 0 0 / 0.15);
+  border-radius: 999px;
+  background: var(--color-surface);
+  text-decoration: none;
+  font-size: 0.875rem;
+  transition: transform var(--speed-fast) var(--ease);
+}
+
+.social a:hover {
+  transform: translateX(-4px);
+}
+
+/* Section title */
+.section-title {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 800;
+  text-transform: uppercase;
+  margin-bottom: var(--space-lg);
+}
+
+/* Tag (skills) */
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+}
+
+.tag {
+  padding: var(--space-xs) var(--space-md);
+  border-radius: 999px;
+  background: var(--color-surface);
+  border: 1px solid rgb(0 0 0 / 0.15);
+  transition: background var(--speed-fast) var(--ease),
+              color var(--speed-fast) var(--ease);
+}
+
+.tag:hover {
+  background: var(--color-primary);
+  color: var(--color-surface);
+}
+
+/* Card (projects) */
+.card {
+  /* background: var(--color-surface); */
+  background: black;
+  border-radius: var(--radius);
+  padding: var(--space-md);
+  transition: transform var(--speed-fast) var(--ease),
+              box-shadow var(--speed-fast) var(--ease);
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px rgb(0 0 0 / 0.08);
+}
+
+.card-img {
+  aspect-ratio: 16 / 10;
+  border-radius: calc(var(--radius) - 4px);
+  background: var(--color-bg);
+  margin-bottom: var(--space-md);
+}
+
+.card h3 {
+  font-size: 1.25rem;
+  margin-bottom: var(--space-xs);
+  color: white;
+}
+
+.card p {
+  font-size: 0.95rem;
+  opacity: 0.8;
+  margin-bottom: var(--space-md);
+  color: white;
+}
+
+.card-link {
+  color: var(--color-primary);
+  font-weight: 500;
+  text-decoration: none;
+  color: white;
+}
+
+
+/* ============================================================
+   6. SECTIONS  (แต่ละส่วนของหน้า)
+   ============================================================ */
+.section {
+  padding-block: var(--space-2xl);
+}
+
+/* About: 2 คอลัมน์ */
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-xl);
+  
+}
+
+/* Projects: 3 คอลัมน์ */
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-lg);
+}
+
+/* Contact: อยู่กลาง */
+.section--contact {
+  text-align: center;
+}
+
+.section--contact .btn {
+  margin-top: var(--space-md);
+}
+
+
+/* ============================================================
+   7. ANIMATIONS  (@keyframes = ฉาก, เรียกใช้ด้วย animation)
+   ============================================================ */
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(var(--space-md));
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* สำหรับ scroll reveal ใช้คู่กับ JS (ยังไม่ได้ใส่ใน HTML) */
+.reveal {
+  opacity: 0;
+  transform: translateY(var(--space-md));
+  transition: opacity var(--speed-base) var(--ease),
+              transform var(--speed-base) var(--ease);
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ปิด animation สำหรับคนที่ตั้งค่าลดการเคลื่อนไหว */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
